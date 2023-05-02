@@ -1,6 +1,7 @@
 import { LitElement, html, css } from 'lit';
 
 
+
 class MeritBadge extends LitElement {
   static properties = {
     date: {type: String},
@@ -49,7 +50,7 @@ class MeritBadge extends LitElement {
     var day = date.getDate()
     var month = date.getMonth()+1
     var year = date.getFullYear()
-    return " "+ day.toString() + "/" + month.toString() + "/" + year.toString();
+    return " "+ month.toString() + "/" + day.toString() + "/" + year.toString();
   }
 
   render() {
