@@ -1,4 +1,9 @@
 import { LitElement, html, css } from 'lit';
+import "@lrnwebcomponents/absolute-position-behavior/absolute-position-behavior.js";
+import "@lrnwebcomponents/simple-icon/simple-icon.js";
+import "@lrnwebcomponents/simple-icon/lib/simple-icons.js";
+import "@lrnwebcomponents/simple-icon/lib/simple-icon-button.js";
+import "@lrnwebcomponents/simple-colors/simple-colors.js";
 
 
 
@@ -11,14 +16,15 @@ class MeritBadge extends LitElement {
   }
 
   static styles = css`
+   
     .badge{
       width: 400px;
       height: 400px;
       border: 2px; 
-      background-color: #000080; 
+      background-color: var(--simple-colors-default-theme-purple-2);
       border-radius: 50%;
       text-align : center;
-      outline: 4px dashed #000080; 
+      outline: 4px dashed var(--simple-colors-default-theme-purple-2); 
 
     }
     .date{
@@ -30,17 +36,17 @@ class MeritBadge extends LitElement {
       fill: transparent;
       align: center;
    }
+
    text {
     fill: white;
     align: right; 
-  }
-
+  }       
   `;
 
   constructor() {
     super();
     this.date = this.getDate(); 
-    this.icon = "https://static.thenounproject.com/png/65999-200.png";
+    this.icon = "https://static.thenounproject.com/png/1564259-200.png";
     this.title = "Tester Title hehe haha hoho lol"; 
     
   }
@@ -69,8 +75,8 @@ class MeritBadge extends LitElement {
      </div> 
 
      <div class="iconImage">
-        <img src="${this.icon}"class="logo">
-      </div>
+       <img src="${this.icon}"class="logo">
+     </div>
 
       <div class="title">
        <svg viewBox="0 0 500 100" class="body">
