@@ -41,13 +41,20 @@ class MeritBadge extends LitElement {
     fill: white;
     align: right; 
   }       
+
+  .iconsDiv {
+    margin: 1px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
   `;
 
   constructor() {
     super();
     this.date = this.getDate(); 
     this.icon = "https://static.thenounproject.com/png/1564259-200.png";
-    this.title = "Tester Title hehe haha hoho lol"; 
+    this.title = "A B C D E F "; 
     
   }
 
@@ -65,10 +72,10 @@ class MeritBadge extends LitElement {
 
      <div class="date">
      <svg viewBox="0 0 500 100" class="body">
-       <path id="curve" d="M73.2,148.6c4-6.1,65.5-96.8,178.6-95.6c111.3,1.2,170.8,90.3,175.1,97"/>
+       <path id="curve" d="M73.2,222.9c4-6.1,65.5-145.2,178.6-143.4c111.3,1.2,170.8,135.5,175.1,145.5"/>
        <text width="100">
          <textPath xlink:href="#curve"startOffset="50%" text-anchor="middle">
-           ${this.date}
+           ${this.title}
          </textPath>
       </text>
       </svg> 
@@ -83,11 +90,20 @@ class MeritBadge extends LitElement {
          <path id="curve2" d="M73.2,148.6c4-6.1,65.5-96.8,178.6-95.6c111.3,1.2,170.8,90.3,175.1,97"/>
           <text width="100">
            <textPath xlink:href="#curve" startOffset="50%" text-anchor="middle">
-           ${this.title}
+           ${this.date}
           </textPath>
           </text>
         </svg> 
       </div>
+
+      
+      <div class="iconsDiv">
+      <simple-icon-button icon="check-circle"></simple-icon-button>
+      <simple-icon-button icon="check-circle"></simple-icon-button>
+      <simple-icon-button icon="check-circle"></simple-icon-button>
+      </div>
+      
+
     </div>
     
 
