@@ -13,10 +13,8 @@ class MeritBadge extends LitElement {
     date: {type: String},
     icon: { type: String },
     title: {type: String},
-    skils: {type: Array },
+    skills: {type: Array },
     verifyLink: {type: String},
-
-    //recheck please 
     activeNode: {type: Object},
     activeNodeTwo: {type: Object},
     skillsOpened: {type: Boolean},
@@ -26,10 +24,14 @@ class MeritBadge extends LitElement {
   }
 
   static styles = css`
+     :host{
+      display: inline-block;
+      text-align: center;
+      position: relative;
+     }
+
     .badge{
       z-index: 5;
-      top: 10px;
-      left:10px; 
       position: absolute; 
       width: 400px;
       height: 400px;
@@ -39,8 +41,6 @@ class MeritBadge extends LitElement {
       text-align : center;
       outline: 4px dashed var(--simple-colors-default-theme-purple-2);
       box-shadow: 0 0 0 5px var(--simple-colors-default-theme-accent-1), 1px 0px 5px 0px ;  
-      padding: 20px; 
-      margin: 20px;
 
     }
 
@@ -56,8 +56,7 @@ class MeritBadge extends LitElement {
       text-align : center;
       outline: 4px dashed grey;
       box-shadow: 0 0 0 5px var(--simple-colors-default-theme-accent-1), 1px 0px 5px 0px ;  
-      padding: 20px; 
-      margin: 20px;
+
 
     }
 
@@ -111,16 +110,14 @@ class MeritBadge extends LitElement {
     min-width: 100px;
     
   }
-  
   `;
 
   constructor() {
     super();
     this.date = this.getDate(); 
     this.icon = "https://static.thenounproject.com/png/1564259-200.png";
-    this.title = "ABCDEFGHIJKLMNOP"; 
+    this.title = "Tech Genius"; 
     this.verifyLink = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-
 
     // recheck please 
     this.skills = ['Computers', 'Business','Biology'];
@@ -130,8 +127,7 @@ class MeritBadge extends LitElement {
     this.skillsOpened = false;
     this.detailsOpened = false;
     
-
-    
+  
   }
 
   getDate(){
@@ -141,6 +137,7 @@ class MeritBadge extends LitElement {
     var year = date.getFullYear()
     return " "+ month.toString() + "/" + day.toString() + "/" + year.toString();
   }
+  
 
   buttonUnlock(){
     this.locked = !this.locked;
@@ -180,9 +177,11 @@ class MeritBadge extends LitElement {
 
   render() {
     return html`
+    <div id=buttonpanel>
+    <button @click="${this.buttonUnlock}"> Unlock Badge </button>
+    </div>
 
     <div class="lockBadge">
-     <h3> Aquire Skills to Unlock Badge</h3>
     </div>
 
     <div class = "badge">
@@ -222,11 +221,6 @@ class MeritBadge extends LitElement {
 
     </div>
     </div>
-
-    <div id=buttonpanel>
-      <button @click="${this.buttonUnlock}"> Unlock Badge </button>
-    </div>
-
 
   <absolute-position-behavior
     justify
