@@ -8,7 +8,8 @@ import "@lrnwebcomponents/simple-colors/simple-colors.js";
 
 
 class MeritBadge extends LitElement {
-  static properties = {
+  static get properties(){
+    return {
     ...super.properties,
     date: {type: String},
     icon: { type: String },
@@ -16,11 +17,9 @@ class MeritBadge extends LitElement {
     skills: {type: Array },
     verifyLink: {type: String},
     activeNode: {type: Object},
-    activeNodeTwo: {type: Object},
     skillsOpened: {type: Boolean},
-    details: {type: Array},
     detailsOpened: {type: Boolean},
-   
+    };
   }
 
   static styles = css`
@@ -40,7 +39,6 @@ class MeritBadge extends LitElement {
       border-radius: 50%;
       text-align : center;
       outline: 4px dashed var(--simple-colors-default-theme-purple-2);
-      box-shadow: 0 0 0 5px var(--simple-colors-default-theme-accent-1), 1px 0px 5px 0px ;  
 
     }
 
@@ -54,8 +52,7 @@ class MeritBadge extends LitElement {
       background-color: grey;
       border-radius: 50%;
       text-align : center;
-      outline: 4px dashed grey;
-      box-shadow: 0 0 0 5px var(--simple-colors-default-theme-accent-1), 1px 0px 5px 0px ;  
+      outline: 4px dashed grey; 
 
 
     }
@@ -76,7 +73,7 @@ class MeritBadge extends LitElement {
   }       
 
   .iconsDivs {
-    margin: 1px;
+    margin-bottom: 2px;
     display: inline-block;
     vertical-align: middle;
   }
@@ -100,7 +97,7 @@ class MeritBadge extends LitElement {
     background-color: pink;
     border: 2px dashed black; 
   }
-  .detailsTwo{
+  .badgeDetails{
     background-color: pink;
     padding: 20px;
     padding-top: 2px;
@@ -115,13 +112,8 @@ class MeritBadge extends LitElement {
   constructor() {
     super();
     this.date = this.getDate(); 
-    this.icon = "https://static.thenounproject.com/png/1564259-200.png";
-    this.title = "Tech Genius"; 
     this.verifyLink = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-
-    // recheck please 
-    this.skills = ['Computers', 'Business','Biology'];
-    this.details = ['JavaScript', 'Management', "Science"];
+    this.skills = ["Hardwork", "Dedication", "Perseverance"];
     this.activeNode = null;
     this.activeNodeTwo = null;
     this.skillsOpened = false;
@@ -243,8 +235,7 @@ class MeritBadge extends LitElement {
     auto
     .target="${this.activeNode}"
     ?hidden="${!this.detailsOpened}">
-      <ul class="detailsTwo"><h3>Details</h3>
-      ${this.details.map(item => html`<li>${item}</li>`)}</ul>
+    <p class="badgeDetails"> Details: Congrats on unlocking this badge!</p>
   </absolute-position-behavior>
         
     `;
