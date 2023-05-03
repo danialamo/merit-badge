@@ -12,7 +12,16 @@ class MeritBadge extends LitElement {
     ...super.properties,
     date: {type: String},
     icon: { type: String },
-    title: {type: String}
+    title: {type: String},
+    skils: {type: Array },
+    verifyLink: {type: String},
+
+    //recheck please 
+    activeNode: {type: Object},
+    activeNodeTwo: {type: Object},
+    skillsOpened: {type: Boolean},
+    details: {type: Array},
+    detailsOpened: {type: Boolean},
    
   }
 
@@ -54,7 +63,7 @@ class MeritBadge extends LitElement {
 
     .date{
       align-content: center;
-      color: white; 
+      color: black ; 
       font-size : 30px;
     }
     path {
@@ -67,14 +76,40 @@ class MeritBadge extends LitElement {
     align: right; 
   }       
 
-  .iconsDiv {
+  .iconsDivs {
     margin: 1px;
     display: inline-block;
     vertical-align: middle;
   }
+  .iconDiv {
+    display: inline-block;
+    padding: 1rem 0.5rem;
+    vertical-align: middle;
+  }
 
   .buttonPanel{
-    margin: 20px;ss
+    margin: 20px;
+  }
+
+  .skills {
+    background-color: grey;
+    padding: 20px;
+    padding-top: 2px;
+    margin: 3px;
+    width: 100%;
+    min-width: 100px;
+    background-color: pink;
+    border: 2px dashed black; 
+  }
+  .detailsTwo{
+    background-color: pink;
+    padding: 20px;
+    padding-top: 2px;
+    margin: 3px;
+    border: 2px dashed black;
+    width: 100%;
+    min-width: 100px;
+    
   }
   
   `;
@@ -84,6 +119,18 @@ class MeritBadge extends LitElement {
     this.date = this.getDate(); 
     this.icon = "https://static.thenounproject.com/png/1564259-200.png";
     this.title = "ABCDEFGHIJKLMNOP"; 
+    this.verifyLink = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+
+
+    // recheck please 
+    this.skills = ['Computers', 'Business','Biology'];
+    this.details = ['JavaScript', 'Management', "Science"];
+    this.activeNode = null;
+    this.activeNodeTwo = null;
+    this.skillsOpened = false;
+    this.detailsOpened = false;
+    
+
     
   }
 
@@ -106,11 +153,36 @@ class MeritBadge extends LitElement {
     }
   }
 
+
+
+  firstUpdated(changedProperties) {
+    if (super.firstUpdated) {
+      super.firstUpdated(changedProperties);
+    }
+    this.activeNode = this.shadowRoot.querySelector("#skillList");
+    this.activeNodeTwo = this.shadowRoot.querySelector("#detailList");
+  }
+
+  skillClick(e) {
+    this.skillsOpened = !this.skillsOpened;
+    this.detailsOpened = false; 
+  }
+
+  detailsClick(e) {
+    this.detailsOpened = !this.detailsOpened;
+    this.skillsOpened = false; 
+  }
+
+  verify() {
+    window.open(this.verifyLink, "_blank");
+  }
+
+
   render() {
     return html`
 
     <div class="lockBadge">
-     <img src="https://www.freeiconspng.com/thumbs/lock-icon/lock-icon-11.png">
+     <h3> Aquire Skills to Unlock Badge</h3>
     </div>
 
     <div class = "badge">
@@ -134,20 +206,53 @@ class MeritBadge extends LitElement {
       </div>
 
       
-      <div class="iconsDiv">
-      <simple-icon-button icon="check-circle"></simple-icon-button>
-      <simple-icon-button icon="check-circle"></simple-icon-button>
-      <simple-icon-button icon="check-circle"></simple-icon-button>
+    <div class="iconsDivs">
+
+      <div class="iconDiv" id="skillList">
+      <simple-icon-button icon="assignment" @click="${this.skillClick}"></simple-icon-button>
+      </div>
+      
+      <div class="iconDiv" id="detailsList">
+      <simple-icon-button icon="work" @click="${this.detailsClick}"></simple-icon-button>
+      </div>
+
+      <div class="iconDiv">
+      <simple-icon-button icon="launch" @click="${this.verify}"></simple-icon-button>
       </div>
 
     </div>
+    </div>
 
-    <div class=buttonpanel>
+    <div id=buttonpanel>
       <button @click="${this.buttonUnlock}"> Unlock Badge </button>
     </div>
-    
 
-     
+
+  <absolute-position-behavior
+    justify
+    position="bottom"
+    allow-overlap
+    sticky
+    auto
+    .target="${this.activeNode}"
+    ?hidden="${!this.skillsOpened}">
+      <ul class="skills"><h3>Skills</h3>
+      ${this.skills.map(item => html`<li>${item}</li>`)}</ul>
+  </absolute-position-behavior>
+
+
+  <absolute-position-behavior
+    justify
+    position="bottom"
+    allow-overlap
+    sticky
+    auto
+    .target="${this.activeNode}"
+    ?hidden="${!this.detailsOpened}">
+      <ul class="detailsTwo"><h3>Details</h3>
+      ${this.details.map(item => html`<li>${item}</li>`)}</ul>
+  </absolute-position-behavior>
+        
     `;
   }
 }
